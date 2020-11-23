@@ -27,6 +27,7 @@ const DISPATCH_URL = `${BASE_URL}/actions/workflows/${WORKFLOW}/dispatches`;
     });
 
     if (request.status === 204) {
+        console.log(request);
         console.log('success');
         process.exit(0);
     }
