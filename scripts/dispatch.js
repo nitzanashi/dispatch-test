@@ -37,7 +37,7 @@ const BASE_URL = `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows
         }),
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${TOKEN}`,
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
         },
         method: 'POST',
     });
