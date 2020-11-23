@@ -22,4 +22,4 @@ jobs:
           key: ${{runner.os}}-node-${{hashFiles('**/package-lock.json')}}
           restore-keys: ${{runner.os}}-node-
       - run: npm ci
-      - run: node scripts/dispatch-workflow/lighthouse-seo.js
+      - run: node scripts/dispatch.js
