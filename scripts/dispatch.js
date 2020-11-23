@@ -18,8 +18,11 @@ const BASE_URL = `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows
     let ref;
 
     try {
+        const test = (await execPromise('git branch -r')).stdout;
+        console.log(test);
         ref = (await execPromise(`git show-ref remotes/origin/${BRANCH}`)).stdout.split(' ')[0];
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log('Branch does not exists nothing to do.');
         process.exit(0);
     }
