@@ -6,6 +6,8 @@ on:
 env:
   GITHUB_TOKEN: ${{github.token}}
   NODE_VERSION: '14.1'
+  JOB_URL: 'https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}'
+  STATUS_DESCRIPTION: 'Lighthouse SEO'
 
 jobs:
   seo:
