@@ -1,0 +1,25 @@
+name: Schedule Jobs
+
+on:
+  push
+
+env:
+  GITHUB_TOKEN: ${{github.token}}
+  NODE_VERSION: '14.1'
+
+jobs:
+  ligthouse-seo:
+    name: Trigger Lighthouse SEO
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.NODE_VERSION}}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{runner.os}}-node-${{hashFiles('**/package-lock.json')}}
+          restore-keys: ${{runner.os}}-node-
+      - run: npm ci
+      - run: node scripts/dispatch-workflow/lighthouse-seo.js
