@@ -4,7 +4,7 @@ on:
   push
 
 env:
-  GITHUB_TOKEN: ${{github.token}}
+  GITHUB_TOKEN: ${{secrets.TOKEN}}
   NODE_VERSION: '14.1'
 
 jobs:
