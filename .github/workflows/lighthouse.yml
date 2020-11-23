@@ -16,6 +16,13 @@ jobs:
       AURA: zattoo
       PROJECT: seo
     steps:
+      - name: Announce
+        uses: sibz/github-status-action@v1
+        with:
+          authToken: ${{env.GITHUB_TOKEN}}
+          context: 'lighthouse'
+          state: 'pending'
+          target_url: ${{env.JOB_URL}}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -28,3 +35,19 @@ jobs:
       - run: npm install -g @lhci/cli@0.5.x
       - name: Run Lighthouse CI
         run: lhci autorun --config=projects/${{env.PROJECT}}/config/lighthouse.json
+      - name: Success
+        if: success()
+        uses: sibz/github-status-action@v1
+        with:
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'lighthouse'
+          state: 'success'
+          target_url: ${{env.GITHUB_TOKEN}}
+      - name: Failure
+        if: failure()
+        uses: sibz/github-status-action@v1
+        with:
+          authToken: ${{env.GITHUB_TOKEN}}
+          context: 'lighthouse'
+          state: 'failure'
+          target_url: ${{env.JOB_URL}}
